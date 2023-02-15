@@ -32,18 +32,18 @@ Our solution is to create an application that allows customers to make food orde
 
 Creating this application will require the use of external libraries which increases the complexity, the main one in particular is:
 
-- ****Auth0**** - For proper authorization and permission control of customers, waiter/waitress, and restaurant owners (1)
+- \***\*Auth0\*\*** - For proper authorization and permission control of customers, waiter/waitress, and restaurant owners (1)
 - **Socket.IO** - For a direct communication channel between customers and waiter/waitress. When an order is made through the customer, and POS updates in real time. This will be used as a replacement for long polling (2)
 - **Stripe** - To enable payment from customers (2)
 - **SendGrid** - To send email receipt to the customers after they've made a payment (2)
-- **Twilio** - To send SMS to waiters that an order has been placed by customers in order to alert them (2) 
+- **Twilio** - To send SMS to waiters that an order has been placed by customers in order to alert them (2)
 
 ### **Extra Complexity**
 
 Some of the extra features requires extra library to complete:
 
 - **React Flow** - Restaurant owners can customize the layout (nodes) of their restaurants and waiters can navigate which table they're serving (2)
--  **Push API** - When the POS side of the application is closed, they should still receive notification that an order has been made  through offline push notifications (3)
+- **Push API** - When the POS side of the application is closed, they should still receive notification that an order has been made through offline push notifications (3)
 - **Three.js** - Custom animations for landing page and home page? (2)
 
 ## **Goals for Alpha/Beta/Final**
