@@ -6,7 +6,7 @@ An application aimed to improve to the Efficiency and Flow of **Restaurants** th
 
 - **Benjamin Saobuppha** (1006157276)
 - **Johnson Su** (1005870461)
-- **Yeonoh Jung** ()
+- **Yeonoh Jung** (1000046942)
 
 ## **Description**
 
