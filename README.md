@@ -7,11 +7,12 @@
 
 ## Description
 
-TaleSpin is an AI-powered children's storybook generator that allows users to create and view stories of their liking. Users can log in and be verified using Auth0, and submit short story prompts through the web application to act as a "seed" for generating a storybook that contains not only text but accompanying images. This will be done by feeding the prompt to ChatGPT through their API to generate the story content.
+TaleSpin is an AI-powered children’s storybook generator that allows the creation and viewing of stories to your liking. Users will be able to log in and be verified with Auth0 and submit short story prompts through the web application that acts as a “seed” for generating a storybook that contains not only text but accompanying images. This will be done by feeding the prompt to ChatGPT through their API to generate the story content.
 
 For each text block generated, we will use ChatGPT to write an accompanying image prompt which we will feed to the DALL-E API to create an image. The text and image will be combined into a storybook which the user can access and share through emails using SendGrid.
 
-If users are interested in continuing the storybook or creating a sequel, we will implement a payment feature with Stripe that allows users to pay to generate more of a particular story they enjoy.
+If users are interested in further continuing the storybook / creating a sequel, we will implement a payment feature with Stripe that allows users to pay to generate more of a particular story they enjoy.
+
 
 ## Complexity Points
 
