@@ -1,6 +1,7 @@
 # **TaleSpin**
 
 Children Storybook Generation powered by Stable Diffusion & GPT-3
+
 ## **Team**
 
 - Benjamin Saobuppha (1006157276)
