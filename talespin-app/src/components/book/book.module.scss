@@ -2,37 +2,34 @@
 @import "../../styles/breakpoints.scss";
 
 .bookContainer {
+  @media only screen and (max-width: $breakpoint-md) {
+    transform: scale(0.6);
 
-    @media only screen and (max-width: $breakpoint-md) {
-        transform: scale(0.60);
+    height: fit-content;
+  }
 
-        height: fit-content;
+  .book {
+    width: 700px;
+    height: 980px;
+    border-radius: 1rem;
+    background-color: $cl-1;
+
+    padding: 1rem;
+
+    background-size: cover;
+    background-position: center;
+
+    .bookImage {
+      height: 70%;
+      border-radius: 8px;
     }
-    
-    .book {
-        width: 700px;
-        height: 980px;
-        border-radius: 1rem;
-        background-color: $cl-1;
-    
-        padding: 1rem;
 
-        background-size: cover;
-        background-position: center;
-    
-        .bookImage {
-            height: 70%;
-            border-radius: 8px;
-    
-            
-        }
-    
-        .bookContent {
-            height: 27.5%;
-            border-radius: 8px;
-    
-            background-color: white;
-            padding: 2rem;
-        }
+    .bookContent {
+      height: 27.5%;
+      border-radius: 8px;
+
+      background-color: white;
+      padding: 2rem;
     }
+  }
 }
