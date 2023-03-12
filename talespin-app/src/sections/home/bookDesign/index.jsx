@@ -1,6 +1,7 @@
 import styles from "./bookDesign.module.scss";
 
 import { useState } from "react";
+import { useRouter } from "next/router";
 
 import FeatherIcon from "feather-icons-react/build/FeatherIcon";
 
@@ -28,7 +29,23 @@ const {
 } = styles;
 
 export default function BookDesignSection() {
+  const router = useRouter();
   const [bookGenerationStep, setBookGenerationStep] = useState(0);
+
+  const [title, setTitle] = useState("");
+  const [prompt, setPrompt] = useState("");
+
+  function handleNextButton() {
+    bookGenerationStep === 0
+      ? setBookGenerationStep(1)
+      : router.push({
+          pathname: "/loadingScreen",
+          query: {
+            title,
+            prompt,
+          },
+        });
+  }
 
   return (
     <>
@@ -46,7 +63,7 @@ export default function BookDesignSection() {
                   <textarea
                     rows={2}
                     placeholder={"Title"}
-                    onChange={(t) => console.log(t.target.value)}
+                    onChange={(t) => setTitle(t.target.value)}
                   />
                 </div>
 
@@ -67,7 +84,7 @@ export default function BookDesignSection() {
                 rows={8}
                 placeholder="A little knight who goes across the kingdom to help the elderly. He fights scary monsters and rescues a princess from the evil forces! ..."
                 className="mb-4"
-                onChange={(t) => console.log(t.target.value)}
+                onChange={(t) => setPrompt(t.target.value)}
               />
 
               <div className="mb-8">
@@ -122,9 +139,9 @@ export default function BookDesignSection() {
 
           <button
             className={`${controlNavigationButton}`}
-            onClick={() => setBookGenerationStep(bookGenerationStep + 1)}
+            onClick={() => handleNextButton()}
           >
-            <label>Next!</label>
+            <label>{bookGenerationStep === 1 ? "Write" : "Next!"}</label>
             <FeatherIcon
               icon={"arrow-right-circle"}
               size={64}
