@@ -8,6 +8,8 @@ const { loader } = styles;
 import { useRouter } from "next/router";
 import { useEffect } from "react";
 
+import axios from "axios";
+
 export default function LoadingScreen() {
   const router = useRouter();
   const { title, prompt } = router.query;
@@ -17,9 +19,32 @@ export default function LoadingScreen() {
   }, []);
 
   async function fetchGeneratedBook() {
-    setTimeout(async () => {
-      await router.push("/book");
-    }, 1000);
+    let data = JSON.stringify({
+      prompt,
+    });
+
+    let config = {
+      method: "post",
+      url: "http://localhost:3001/api/story/generate-story",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      data: data,
+    };
+
+    axios(config)
+      .then(function (response) {
+        console.log(response.data);
+        router.push({
+          pathname: "/book",
+          query: {
+            storyInformationJSON: JSON.stringify(response.data),
+          },
+        });
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
   }
 
   return (
