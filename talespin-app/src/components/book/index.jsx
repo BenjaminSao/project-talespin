@@ -16,15 +16,14 @@ export default function Book() {
     if (localStorage.getItem("generatedBook") != null)
       setStoryInformation(JSON.parse(localStorage.getItem("generatedBook")));
     else {
-      alert("Error Loading Book")
+      alert("Error Loading Book");
       router.push("/");
     }
   }, []);
 
   useEffect(() => {
-    if (storyInformation) 
-      setBookContent(storyInformation.pages[0]);
-  }, [storyInformation])
+    if (storyInformation) setBookContent(storyInformation.pages[0]);
+  }, [storyInformation]);
 
   function handleNextPage() {
     if (index < storyInformation.pages.length - 1) {
@@ -60,20 +59,21 @@ export default function Book() {
             </button>
             <div className={`${bookContainer}`}>
               <div className={`${book} mt-4 flex flex-col justify-between`}>
-              { bookContentData ? (
-                <>
-                  <div
-                    className={`${bookImage}`}
-                    style={{
-                      backgroundImage: `url(${bookContentData.image})`,
-                    }}
-                  ></div>
-                  <div className={`${bookContent} flex items-center`}>
-                    <p className="text-center">{bookContentData.text}</p>
-                  </div>
-                </>
-              ) : <></>}
-                
+                {bookContentData ? (
+                  <>
+                    <div
+                      className={`${bookImage}`}
+                      style={{
+                        backgroundImage: `url(${bookContentData.image})`,
+                      }}
+                    ></div>
+                    <div className={`${bookContent} flex items-center`}>
+                      <p className="text-center">{bookContentData.text}</p>
+                    </div>
+                  </>
+                ) : (
+                  <></>
+                )}
               </div>
             </div>
             <button

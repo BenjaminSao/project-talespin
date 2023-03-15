@@ -38,13 +38,13 @@ export default function LoadingScreen() {
         router.push({
           pathname: "/book",
           query: {
-            title
-          }
+            title,
+          },
         });
       })
       .catch(() => {
-        alert("An error has occurred generating story")
-        router.push("/")
+        alert("An error has occurred generating story");
+        router.push("/");
       });
   }
 
