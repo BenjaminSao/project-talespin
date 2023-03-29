@@ -16,12 +16,12 @@
 
     padding: 1rem;
 
-    background-size: cover;
-    background-position: center;
-
     .bookImage {
       height: 70%;
       border-radius: 8px;
+
+      background-size: cover;
+      background-position: center;
     }
 
     .bookContent {
