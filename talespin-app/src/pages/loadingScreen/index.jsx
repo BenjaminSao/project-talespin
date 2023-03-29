@@ -25,7 +25,7 @@ export default function LoadingScreen() {
 
     const config = {
       method: "post",
-      url: "http://localhost:3001/api/story/generate-story",
+      url: "http://localhost:3001/api/story/generateStory",
       headers: {
         "Content-Type": "application/json",
       },
