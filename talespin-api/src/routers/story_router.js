@@ -7,7 +7,7 @@ import { Router } from "express";
 export const storyRouter = Router();
 
 // Given a story prompt, generate an object containing pages of the children's story book
-storyRouter.post("/generate-story/", async (req, res) => {
+storyRouter.post("/generateStory/", async (req, res) => {
   const storyPrompt = req.body.prompt;
   const story = await generateStory(storyPrompt);
   const imagePrompts = await generatePrompts(story);

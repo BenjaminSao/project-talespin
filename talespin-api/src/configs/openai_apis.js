@@ -12,4 +12,5 @@ export const chatGPTAPI = new ChatGPTAPI({
 const configuration = new Configuration({
   apiKey: process.env.OPENAI_API_KEY,
 });
+
 export const openAIAPI = new OpenAIApi(configuration);
