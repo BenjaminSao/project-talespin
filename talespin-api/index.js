@@ -1,6 +1,6 @@
 import express from "express";
 import bodyParser from "body-parser";
-import { storyRouter } from "./src/routers/story-router.js";
+import { storyRouter } from "./src/routers/story_router.js";
 import cors from "cors";
 
 const PORT = process.env.API_URL || 3001;
