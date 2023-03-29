@@ -5,7 +5,7 @@ import cors from "cors";
 
 import { sequelize } from "./datasource.js";
 import { User } from "./models/user.js";
-User
+User;
 
 const PORT = process.env.API_URL || 3001;
 export const app = express();
@@ -28,7 +28,7 @@ app.use(function (req, res, next) {
 // Add Endpoints Here!
 app.get("/", async (req, res) => {
   const user = await User.create({
-    username: "Ben"
+    username: "Ben",
   });
 });
 
