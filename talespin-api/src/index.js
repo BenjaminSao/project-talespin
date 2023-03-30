@@ -1,39 +1,41 @@
 import express from "express";
+
 import bodyParser from "body-parser";
 import { storyRouter } from "./routers/story_router.js";
 import { imageRouter } from "./routers/image_router.js";
+import { log } from "./middlewares/log_middleware.js";
+
 import cors from "cors";
+import bodyParser from "body-parser";
+import { getUserId } from "./utils/authentication_util.js";
+import { checkJwt } from "./middlewares/authentication_middleware.js";
+
 
 import { sequelize } from "./datasource.js";
+import { sequelizeSetup } from "./configs/sequelize_config.js";
+import { errorHandling } from "./middlewares/error_handling_middleware.js";
 
+// Express Setup
 const PORT = process.env.API_URL || 3001;
 export const app = express();
-app.use(bodyParser.json());
-app.use(cors());
 
-try {
-  await sequelize.authenticate();
-  await sequelize.sync({ alter: { drop: false } });
-  console.log("Connection has been established successfully.");
-} catch (error) {
-  console.error("Unable to connect to the database:", error);
-}
-
-app.use(function (req, res, next) {
-  console.log("HTTP request", req.method, req.url, req.body);
-  next();
-});
-
-// Add Endpoints Here!
-app.get("/", async (req, res) => {
-  return res.status(200).json("Hello World");
-});
-
-// Set up routers
-app.use("/api/stories", storyRouter);
+app.use("/api/story", storyRouter);
 app.use("/api/images", imageRouter);
 
-app.listen(PORT, (e) => {
-  if (e) console.log(e);
-  else console.log("Server is running on Port:", PORT);
-});
+_serverSetup();
+_runServer();
+
+async function _serverSetup() {
+  app.use(bodyParser.json());
+  app.use(cors());
+  app.use(log);
+  app.use(errorHandling);
+  await sequelizeSetup();
+}
+
+function _runServer() {
+  app.listen(PORT, (e) => {
+    if (e) console.log(e);
+    else console.log("Server is running on Port:", PORT);
+  });
+}
