@@ -1,4 +1,8 @@
 import { chatGPTAPI, openAIAPI } from "../configs/openai_apis.js";
+import axios from "axios";
+import { Image } from "../models/image_model.js";
+
+// DALLE-IMAGE SECTION
 
 // Given a story, turn it into image prompts
 export async function generatePrompts(story) {
@@ -26,4 +30,24 @@ export async function generateImages(imagePrompts, modifier = "high_quality") {
   }
 
   return imageURLArray;
+}
+
+// DATABASE IMAGE SECTION
+
+// Given an array of image URLs and a story ID, save them to the database
+// and return an array of their ID's
+export async function saveImgUrlArr(imgArr) {
+  let imageIdArr = [];
+  let count = 1;
+  for (const url of imgArr) {
+    const order = count;
+    const image = await axios.get(url, { responseType: "arraybuffer" });
+    const result = await Image.create({
+      order: order,
+      image: image.data,
+    });
+    imageIdArr.push(result.id);
+    count = count + 1;
+  }
+  return imageIdArr;
 }
