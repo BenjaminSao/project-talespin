@@ -1,6 +1,6 @@
 import express from "express";
 import bodyParser from "body-parser";
-import { storyRouter } from "./routers/story-router.js";
+import { storyRouter } from "./routers/story_router.js";
 import cors from "cors";
 
 import { getUserId } from "./utils/authentication.js";

@@ -20,10 +20,6 @@ export default function Navbar() {
             <h1 className="ml-4">TaleSpin</h1>
           </div>
           <div>
-            <a href="/" className="mr-4">
-              Home
-            </a>
-
             {!isAuthenticated ? (
               <>
                 <a onClick={() => handleLogister()} className="mr-4">
@@ -32,6 +28,9 @@ export default function Navbar() {
               </>
             ) : (
               <>
+                <a href="/bookCreation" className="mr-4">
+                  Create
+                </a>
                 <a href="/dashboard" className="mr-4">
                   Dashboard
                 </a>
