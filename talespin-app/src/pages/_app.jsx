@@ -1,5 +1,5 @@
-import { Auth0Provider } from '@auth0/auth0-react';
-import '../styles/globals.scss';
+import { Auth0Provider } from "@auth0/auth0-react";
+import "../styles/globals.scss";
 
 export default function App({ Component, pageProps }) {
   return (

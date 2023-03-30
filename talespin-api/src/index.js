@@ -8,7 +8,7 @@ import { checkJwt } from "./middlewares/authentication_middleware.js";
 
 import { sequelize } from "./datasource.js";
 import { User } from "./models/user.js";
-User
+User;
 
 const PORT = process.env.API_URL || 3001;
 export const app = express();
@@ -29,10 +29,10 @@ app.use(function (req, res, next) {
 });
 
 // Add Endpoints Here!
-app.get('/stories', checkJwt, function (req, res) {
-  const userId = getUserId(req)
+app.get("/stories", checkJwt, function (req, res) {
+  const userId = getUserId(req);
   res.status(200).json({
-    userId
+    userId,
   });
 });
 

@@ -7,8 +7,8 @@ export default function Navbar() {
 
   function handleLogister() {
     loginWithRedirect({
-      redirectUri: 'http://localhost:3000/dashboard'
-  });
+      redirectUri: "http://localhost:3000/dashboard",
+    });
   }
 
   return (
@@ -20,24 +20,34 @@ export default function Navbar() {
             <h1 className="ml-4">TaleSpin</h1>
           </div>
           <div>
-            <a href="/" className="mr-4">Home</a>
-            
-            {
-              !isAuthenticated ? (
-                <>
-                  <a onClick={() => handleLogister()} className="mr-4">Login</a>
-                </>
-              ) : 
-              (
-                <>
-                  <a href="/dashboard" className="mr-4">Dashboard</a>
-                  <a onClick={() => logout({ logoutParams: { returnTo: window.location.origin } })} className="mr-4">Logout</a>
-                </>
-              )
-            }
-            
+            <a href="/" className="mr-4">
+              Home
+            </a>
+
+            {!isAuthenticated ? (
+              <>
+                <a onClick={() => handleLogister()} className="mr-4">
+                  Login
+                </a>
+              </>
+            ) : (
+              <>
+                <a href="/dashboard" className="mr-4">
+                  Dashboard
+                </a>
+                <a
+                  onClick={() =>
+                    logout({
+                      logoutParams: { returnTo: window.location.origin },
+                    })
+                  }
+                  className="mr-4"
+                >
+                  Logout
+                </a>
+              </>
+            )}
           </div>
-          
         </div>
       </nav>
     </>
