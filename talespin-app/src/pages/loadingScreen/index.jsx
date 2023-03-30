@@ -19,13 +19,13 @@ export default function LoadingScreen() {
   }, []);
 
   async function fetchGeneratedBook() {
-    let data = JSON.stringify({
+    const data = JSON.stringify({
       prompt,
     });
 
-    let config = {
+    const config = {
       method: "post",
-      url: "http://localhost:3001/api/story/generate-story",
+      url: "http://localhost:3001/api/story/generateStory",
       headers: {
         "Content-Type": "application/json",
       },
@@ -34,16 +34,17 @@ export default function LoadingScreen() {
 
     axios(config)
       .then(function (response) {
-        console.log(response.data);
+        localStorage.setItem("generatedBook", JSON.stringify(response.data));
         router.push({
           pathname: "/book",
           query: {
-            storyInformationJSON: JSON.stringify(response.data),
+            title,
           },
         });
       })
-      .catch(function (error) {
-        console.log(error);
+      .catch(() => {
+        alert("An error has occurred generating story");
+        router.push("/");
       });
   }
 
