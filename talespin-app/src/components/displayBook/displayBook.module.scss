@@ -1,0 +1,92 @@
+@import "../../styles/colors.scss";
+
+.book {
+    width: 250px;
+    height: 365px;
+  
+    background-color: $cl-1;
+    color: white;
+    border-radius: 0.75rem;
+    position: relative;
+  
+    z-index: 3;
+  
+    .bookTitle {
+      text-align: center;
+      margin-top: 2.5rem;
+        
+      >h1 {
+        font-size: 2rem;
+        font-weight: bold;
+      }
+    }
+  
+    .bookBadgeContainer {
+      height: 10rem;
+      display: flex;
+      align-items: center;
+      position: relative;
+  
+      .bookBadge {
+        position: absolute;
+        background: linear-gradient(0deg, #06d6a0 -1.07%, #ffc43d 98.82%);
+        width: 100%;
+        height: 5.5rem;
+        transform: matrix(1, 0.35, 0, 1, 0, 0);
+      }
+    }
+  }
+  
+  .bookPage {
+    position: absolute;
+    width: 250px;
+    height: 365px;
+    bottom: 0;
+  
+    background-color: white;
+    border: 3px solid $cl-1;
+  
+    border-radius: 0.75rem;
+    z-index: 2;
+  
+    transform: translateX(7.5px) translateY(7.5px);
+  
+    > textarea {
+      color: $black;
+      font-size: 1.5rem;
+      width: 100%;
+      border: 2px solid rgb(180, 180, 180);
+      padding: 1.5rem;
+      border-radius: 0.5rem;
+      resize: none;
+  
+      &:focus {
+        outline: none;
+      }
+  
+      &::-webkit-scrollbar {
+        display: none;
+      }
+  
+      &::placeholder {
+        color: $black;
+        opacity: 0.2;
+      }
+    }
+  }
+  
+  .book2 {
+    position: absolute;
+    width: 250px;
+    height: 365px;
+    bottom: 0;
+  
+    background-color: $cl-1;
+  
+    color: white;
+    border-radius: 0.75rem;
+    z-index: 1;
+  
+    transform: translateX(10px) translateY(10px);
+  }
+  

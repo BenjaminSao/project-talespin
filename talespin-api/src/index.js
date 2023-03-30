@@ -3,6 +3,9 @@ import bodyParser from "body-parser";
 import { storyRouter } from "./routers/story-router.js";
 import cors from "cors";
 
+import { getUserId } from "./utils/authentication.js";
+import { checkJwt } from "./middlewares/authentication_middleware.js";
+
 import { sequelize } from "./datasource.js";
 import { User } from "./models/user.js";
 User
@@ -26,9 +29,10 @@ app.use(function (req, res, next) {
 });
 
 // Add Endpoints Here!
-app.get("/", async (req, res) => {
-  const user = await User.create({
-    username: "Ben"
+app.get('/stories', checkJwt, function (req, res) {
+  const userId = getUserId(req)
+  res.status(200).json({
+    userId
   });
 });
 
