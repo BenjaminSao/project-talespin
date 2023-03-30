@@ -1,12 +1,11 @@
 import express from "express";
 
-import { storyRouter } from "./routers/story_router.js";
-
-import { log } from "./middlewares/log_middleware.js";
-import cors from "cors";
 import bodyParser from "body-parser";
-import { getUserId } from "./utils/authentication_util.js";
-import { checkJwt } from "./middlewares/authentication_middleware.js";
+import { storyRouter } from "./routers/story_router.js";
+import { imageRouter } from "./routers/image_router.js";
+import { log } from "./middlewares/log_middleware.js";
+
+import cors from "cors";
 
 import { sequelizeSetup } from "./configs/sequelize_config.js";
 import { errorHandling } from "./middlewares/error_handling_middleware.js";
@@ -15,17 +14,6 @@ import { errorHandling } from "./middlewares/error_handling_middleware.js";
 const PORT = process.env.API_URL || 3001;
 export const app = express();
 
-// Use Routers
-// TODO: Get Rid of This
-app.get("/stories", checkJwt, async function (req, res) {
-  const userId = getUserId(req);
-
-  res.status(200).json({
-    userId,
-  });
-});
-app.use("/api/story", storyRouter);
-
 _serverSetup();
 _runServer();
 
@@ -33,7 +21,13 @@ async function _serverSetup() {
   app.use(bodyParser.json());
   app.use(cors());
   app.use(log);
+
+  // Setup routers
+  app.use("/api/stories", storyRouter);
+  app.use("/api/images", imageRouter);
+
   app.use(errorHandling);
+
   await sequelizeSetup();
 }
 
