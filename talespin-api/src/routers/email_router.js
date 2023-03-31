@@ -13,7 +13,7 @@ emailRouter.post("/", async (req, res) => {
   try {
     // Obtain story information
     const story = await Story.findByPk(storyId);
-    const thing = await constructEmail(email, story)
+    const thing = await constructEmail(email, story);
     await sgMail.send(thing);
     res.status(200).json({ message: "Email sent successfully" });
   } catch (error) {
