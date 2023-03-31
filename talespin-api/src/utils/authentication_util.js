@@ -13,3 +13,8 @@ export function getUserId(req) {
     throw new Error("Invalid token");
   }
 }
+
+
+// Modifier buttons
+// Color/book button
+// Fix the pdf CRAP

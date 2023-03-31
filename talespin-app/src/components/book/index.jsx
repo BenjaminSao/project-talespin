@@ -13,7 +13,9 @@ const {
   bookContainer,
   nextPageButton,
   convertToPDFButton,
-  sendBookButton
+  sendBookButton,
+  emailDialog,
+  emailDialogInput
 } = styles;
 
 export default function Book() {
@@ -21,6 +23,8 @@ export default function Book() {
 
   const [bookContentData, setBookContent] = useState(null);
   const [pageIndex, setPageIndex] = useState(0);
+  const [isEmailDialogOpen, setIsEmailDialogOpen] = useState(false);
+  const [email, setEmail] = useState("");
 
   const router = useRouter();
   const { storyId } = router.query;
@@ -78,18 +82,28 @@ export default function Book() {
   }
 
   async function handleSendBook() {
+    setIsEmailDialogOpen(!isEmailDialogOpen);
+  }
+
+  async function handleSendEmail() {
     try {
       const res = await axios({
-        url: "http://localhost:3000/api/emails/",
+        url: "http://localhost:3001/api/emails/",
         method: "POST",
         data: {
-          bruh: "bruh"
+          email,
+          storyId
         }
       });
 
-      console.log(res.data);
+      if (res.status === 200)
+        alert("Email Sent!")
     } catch (e) {
       console.error(e);
+      alert("Failed to send Email")
+    } finally {
+      setEmail("");
+      setIsEmailDialogOpen(false);
     }
   }
 
@@ -150,6 +164,17 @@ export default function Book() {
                         strokeWidth={"1.5px"}
                       ></FeatherIcon>
                     </button>
+                    <div className={`${emailDialog} ${isEmailDialogOpen ? 'visible' : 'invisible'}`}>
+                      <h1><strong>Share</strong></h1>
+                      <div className="flex flex-col">
+                        <label className="mt-2">Email</label>
+                        <div className="flex"></div>
+                        <input type="email" className={`${emailDialogInput}`} placeholder="example@email.com" onChange={(t) => setEmail(t.target.value)} />
+                        <div className="flex justify-end">
+                          <button className="button mt-2" onClick={() => handleSendEmail()}>Send</button>
+                        </div>
+                      </div>
+                    </div>
                   </div>
                 </div>
                 <button
