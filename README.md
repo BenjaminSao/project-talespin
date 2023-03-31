@@ -2,11 +2,13 @@
 
 Children Storybook Generation powered by Stable Diffusion & GPT-3
 
+## **Demo Video**
+[Click to view youtube video](https://youtu.be/0hj8q_1aj3U)
+
 ## **Team**
 
 - Benjamin Saobuppha (1006157276)
 - Johnson Su (1005870461)
-- Yeonoh Jung (1000046942)
 
 ## **Description**
 
