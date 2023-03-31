@@ -14,7 +14,6 @@ export function getUserId(req) {
   }
 }
 
-
 // Modifier buttons
 // Color/book button
 // Fix the pdf CRAP

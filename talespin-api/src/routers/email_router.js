@@ -1,4 +1,4 @@
-import { Story } from "../models/story_model.js"
+import { Story } from "../models/story_model.js";
 import { constructEmail } from "../utils/email_utils.js";
 
 import { Router } from "express";

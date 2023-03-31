@@ -27,7 +27,7 @@ const {
   isLengthSelected,
   artStyleButtons,
   artStyleButton,
-  isArtSelected
+  isArtSelected,
 } = styles;
 
 export default function BookDesignSection() {
@@ -94,18 +94,60 @@ export default function BookDesignSection() {
               <div className="mb-8">
                 <p className="font-bold">I want my story to be...</p>
                 <div className={`${storyLengthButtons} mt-4`}>
-                  <button className={`${storyLengthButton} mr-4 ${length === 'short' ? isLengthSelected : ''}`} onClick={() => setLength('short')}>Short</button>
-                  <button className={`${storyLengthButton} mr-4 ${length === 'medium' ? isLengthSelected : ''}`} onClick={() => setLength('medium')}>Medium</button>
-                  <button className={`${storyLengthButton} mr-4 ${length === 'long' ? isLengthSelected : ''}`} onClick={() => setLength('long')}>Long</button>
+                  <button
+                    className={`${storyLengthButton} mr-4 ${
+                      length === "short" ? isLengthSelected : ""
+                    }`}
+                    onClick={() => setLength("short")}
+                  >
+                    Short
+                  </button>
+                  <button
+                    className={`${storyLengthButton} mr-4 ${
+                      length === "medium" ? isLengthSelected : ""
+                    }`}
+                    onClick={() => setLength("medium")}
+                  >
+                    Medium
+                  </button>
+                  <button
+                    className={`${storyLengthButton} mr-4 ${
+                      length === "long" ? isLengthSelected : ""
+                    }`}
+                    onClick={() => setLength("long")}
+                  >
+                    Long
+                  </button>
                 </div>
               </div>
 
               <div>
                 <p className="font-bold">I art should be...</p>
                 <div className={`${artStyleButtons} mt-4`}>
-                  <button className={`${artStyleButton} mr-4 ${art === 'colorful' ? isArtSelected : ''}`} onClick={() => setArt('colorful')}>Colorful</button>
-                  <button className={`${artStyleButton} mr-4 ${art === 'minimal' ? isArtSelected : ''}`} onClick={() => setArt('minimal')}>Minimal</button>
-                  <button className={`${artStyleButton} mr-4 ${art === 'realistic' ? isArtSelected : ''}`} onClick={() => setArt('realistic')}>Realistic</button>
+                  <button
+                    className={`${artStyleButton} mr-4 ${
+                      art === "colorful" ? isArtSelected : ""
+                    }`}
+                    onClick={() => setArt("colorful")}
+                  >
+                    Colorful
+                  </button>
+                  <button
+                    className={`${artStyleButton} mr-4 ${
+                      art === "minimal" ? isArtSelected : ""
+                    }`}
+                    onClick={() => setArt("minimal")}
+                  >
+                    Minimal
+                  </button>
+                  <button
+                    className={`${artStyleButton} mr-4 ${
+                      art === "realistic" ? isArtSelected : ""
+                    }`}
+                    onClick={() => setArt("realistic")}
+                  >
+                    Realistic
+                  </button>
                 </div>
               </div>
             </div>

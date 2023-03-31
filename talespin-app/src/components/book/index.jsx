@@ -15,7 +15,7 @@ const {
   convertToPDFButton,
   sendBookButton,
   emailDialog,
-  emailDialogInput
+  emailDialogInput,
 } = styles;
 
 export default function Book() {
@@ -92,15 +92,14 @@ export default function Book() {
         method: "POST",
         data: {
           email,
-          storyId
-        }
+          storyId,
+        },
       });
 
-      if (res.status === 200)
-        alert("Email Sent!")
+      if (res.status === 200) alert("Email Sent!");
     } catch (e) {
       console.error(e);
-      alert("Failed to send Email")
+      alert("Failed to send Email");
     } finally {
       setEmail("");
       setIsEmailDialogOpen(false);
@@ -164,14 +163,30 @@ export default function Book() {
                         strokeWidth={"1.5px"}
                       ></FeatherIcon>
                     </button>
-                    <div className={`${emailDialog} ${isEmailDialogOpen ? 'visible' : 'invisible'}`}>
-                      <h1><strong>Share</strong></h1>
+                    <div
+                      className={`${emailDialog} ${
+                        isEmailDialogOpen ? "visible" : "invisible"
+                      }`}
+                    >
+                      <h1>
+                        <strong>Share</strong>
+                      </h1>
                       <div className="flex flex-col">
                         <label className="mt-2">Email</label>
                         <div className="flex"></div>
-                        <input type="email" className={`${emailDialogInput}`} placeholder="example@email.com" onChange={(t) => setEmail(t.target.value)} />
+                        <input
+                          type="email"
+                          className={`${emailDialogInput}`}
+                          placeholder="example@email.com"
+                          onChange={(t) => setEmail(t.target.value)}
+                        />
                         <div className="flex justify-end">
-                          <button className="button mt-2" onClick={() => handleSendEmail()}>Send</button>
+                          <button
+                            className="button mt-2"
+                            onClick={() => handleSendEmail()}
+                          >
+                            Send
+                          </button>
                         </div>
                       </div>
                     </div>
