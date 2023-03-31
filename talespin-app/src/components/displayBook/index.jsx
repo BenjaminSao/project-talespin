@@ -8,11 +8,10 @@ export default function DisplayBook({ storyId, title, bookColor }) {
   const router = useRouter();
 
   function handleClick() {
-    router.push( 
-    {
+    router.push({
       pathname: "/book",
       query: {
-        storyId
+        storyId,
       },
     });
   }

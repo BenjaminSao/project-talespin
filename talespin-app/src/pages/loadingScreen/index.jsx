@@ -17,8 +17,7 @@ export default function LoadingScreen() {
   const { isAuthenticated, user } = useAuth0();
 
   useEffect(() => {
-    if (user)
-      fetchGeneratedBook();
+    if (user) fetchGeneratedBook();
   }, [isAuthenticated, user]);
 
   async function fetchGeneratedBook() {
@@ -28,7 +27,7 @@ export default function LoadingScreen() {
       colorScheme: "blue", // TODO: CHANGE
       storyLength: 5,
       artStyle: "artstation",
-      ownerId: user.sub
+      ownerId: user.sub,
     });
 
     const config = {
@@ -41,13 +40,13 @@ export default function LoadingScreen() {
     };
     try {
       const res = await axios(config);
-      
+
       router.push({
         pathname: "/book",
         query: {
-          storyId: res.data.storyId
-        }
-      })
+          storyId: res.data.storyId,
+        },
+      });
     } catch (e) {
       console.error(e);
     }

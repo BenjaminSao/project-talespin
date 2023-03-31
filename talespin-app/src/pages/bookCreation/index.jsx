@@ -8,12 +8,7 @@ export default function BookCreation() {
   return (
     <section className="section p-6 md:p-12">
       <Navbar></Navbar>
-      {
-        isAuthenticated && 
-        (
-          <BookDesignSection></BookDesignSection>
-        )
-      }
+      {isAuthenticated && <BookDesignSection></BookDesignSection>}
     </section>
   );
 }

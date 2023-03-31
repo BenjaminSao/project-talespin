@@ -84,7 +84,7 @@ storyRouter.post("/", async (req, res) => {
       storyContent,
     });
   } catch (e) {
-    console.error(e)
+    console.error(e);
     return res.status(500).json({
       message: "Internal Server Error, Failed to Create Story",
       e,
