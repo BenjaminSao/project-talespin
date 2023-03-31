@@ -1,0 +1,85 @@
+@import "../../styles/colors.scss";
+@import "../../styles/breakpoints.scss";
+
+.bookContainer {
+  @media only screen and (max-width: $breakpoint-md) {
+    transform: scale(0.6);
+
+    height: fit-content;
+  }
+
+  .book {
+    width: 700px;
+    height: 980px;
+    border-radius: 1rem;
+    background-color: $cl-1;
+    position: relative;
+
+    padding: 1rem;
+
+    .bookImage {
+      height: 70%;
+      border-radius: 8px;
+
+      background-size: cover;
+      background-position: center;
+    }
+
+    .bookContent {
+      height: 27.5%;
+      border-radius: 8px;
+
+      background-color: white;
+      padding: 2rem;
+    }
+  }
+
+  .convertToPDFButton {
+    position: absolute;
+    bottom: -1rem;
+    right: -1rem;
+    padding: 0.5rem;
+    background-color: white;
+    border-radius: 50%;
+    border: 4px solid $black;
+  }
+
+  .sendBookButton {
+    position: absolute;
+    bottom: -1rem;
+    left: -1rem;
+    padding: 0.5rem;
+    background-color: white;
+    border-radius: 50%;
+    border: 4px solid $black;
+    z-index: 1;
+
+    > svg {
+      transform: translateX(-3px) translateY(3px);
+    }
+  }
+
+  .emailDialog {
+    width: 50rem;
+    height: 15rem;
+
+    background-color: white;
+    position: absolute;
+    bottom: 15px;
+    border-radius: 2rem;
+    z-index: 0;
+    padding: 2rem;
+    border: 3px solid $black;
+
+    .emailDialogInput {
+      font-size: 1.5rem;
+      border-bottom: 2px solid $black;
+      padding: 0.5rem;
+    }
+
+    button {
+      background-color: $cl-1;
+      color: white;
+    }
+  }
+}
