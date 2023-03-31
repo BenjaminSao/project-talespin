@@ -13,6 +13,7 @@ const {
   bookContainer,
   nextPageButton,
   convertToPDFButton,
+  sendBookButton
 } = styles;
 
 export default function Book() {
@@ -76,6 +77,22 @@ export default function Book() {
     }
   }
 
+  async function handleSendBook() {
+    try {
+      const res = await axios({
+        url: "http://localhost:3000/api/emails/",
+        method: "POST",
+        data: {
+          bruh: "bruh"
+        }
+      });
+
+      console.log(res.data);
+    } catch (e) {
+      console.error(e);
+    }
+  }
+
   return (
     <>
       <div className="flex justify-center mt-6">
@@ -115,6 +132,18 @@ export default function Book() {
                     >
                       <FeatherIcon
                         icon={"file-text"}
+                        size={48}
+                        fill={"#4d4d4d"}
+                        color={"#FCFCED"}
+                        strokeWidth={"1.5px"}
+                      ></FeatherIcon>
+                    </button>
+                    <button
+                      className={`${sendBookButton}`}
+                      onClick={() => handleSendBook()}
+                    >
+                      <FeatherIcon
+                        icon={"send"}
                         size={48}
                         fill={"#4d4d4d"}
                         color={"#FCFCED"}
