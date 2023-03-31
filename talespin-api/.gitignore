@@ -31,7 +31,7 @@ yarn-error.log*
 # node.js
 node_modules/
 .env
-.temp.pdf
+temp.pdf
 
 # vercel
 .vercel
