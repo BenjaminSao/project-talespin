@@ -22,7 +22,7 @@ export default function Hero() {
               height={400}
             ></Image>
             <h1 className="mt-8">
-              Welcome to <strong>TailSpin</strong>
+              Welcome to <strong>TaleSpin</strong>
             </h1>
             <button
               className="button style-1 mt-4"

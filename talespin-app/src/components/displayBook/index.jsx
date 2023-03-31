@@ -4,13 +4,14 @@ import { useRouter } from "next/router";
 const { book, bookTitle, bookBadgeContainer, bookBadge, bookPage, book2 } =
   styles;
 
-export default function DisplayBook({ id, title, bookColor }) {
+export default function DisplayBook({ storyId, title, bookColor }) {
   const router = useRouter();
 
   function handleClick() {
-    router.push("/book", {
+    router.push({
+      pathname: "/book",
       query: {
-        id,
+        storyId,
       },
     });
   }

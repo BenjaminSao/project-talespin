@@ -3,6 +3,7 @@ import express from "express";
 import bodyParser from "body-parser";
 import { storyRouter } from "./routers/story_router.js";
 import { imageRouter } from "./routers/image_router.js";
+import { emailRouter } from "./routers/email_router.js";
 import { log } from "./middlewares/log_middleware.js";
 
 import cors from "cors";
@@ -25,6 +26,7 @@ async function _serverSetup() {
   // Setup routers
   app.use("/api/stories", storyRouter);
   app.use("/api/images", imageRouter);
+  app.use("/api/emails", emailRouter);
 
   app.use(errorHandling);
 
