@@ -1,39 +1,34 @@
 import { jsPDF } from "jspdf";
 import fs from "fs";
-import imageType from "image-type"; // install with `npm install image-type`
-import { Image } from "../models/image_model.js";
+import { Image } from "../models/image_model.js"
 
-function generatePDF(storyContent) {
+async function generatePDF(storyContent) {
   const doc = new jsPDF();
-
-  // loop through each page in the storyContent
-  storyContent.pages.forEach(async (page, index) => {
-    // // add the image to the PDF
-    // const imageData = await Image.findByPk(page.image);
-    // const imageBuffer = imageData.image;
-    // const base64Image = imageBuffer.toString('base64');
-    // doc.addImage(
-    //   `data:image/png;base64,${base64Image}`,
-    //   "PNG",
-    //   10,
-    //   10,
-    //   100,
-    //   100
-    // );
-
-    const text = doc.splitTextToSize(page.text, 170);
-    doc.text(text, 10, 170);
-
-    if (index < storyContent.pages.length - 1) {
-      doc.addPage();
-    }
-  });
-
-  doc.save("temp.pdf");
+  for (let i = 0; i < storyContent.pages.length; i++) {
+    const page = storyContent.pages[i]
+    const image = await Image.findByPk(page.image);
+    const imageBuffer = image.image;
+    const base64Image = imageBuffer.toString('base64');
+    doc.addImage(
+      `data:image/jpeg;base64,${base64Image}`,
+      "JPEG",
+      30,
+      30,
+      150, 
+      150,
+    );
+    const text = doc.splitTextToSize(page.text, 150);
+    doc.text(text, 30, 200);
+    doc.addPage();
+  }
+  doc.setFontSize(60);
+  doc.text("THE END", 63, 150);
+  doc.save('./temp.pdf')
 }
 
-export function constructEmail(email, story) {
-  generatePDF(story.storyContent);
+export async function constructEmail(email, story) {
+  await generatePDF(story.storyContent);
+  await new Promise(resolve => setTimeout(resolve, 2000));
   const storyPDF = fs.readFileSync("./temp.pdf").toString("base64");
   const msg = {
     to: email,
@@ -56,5 +51,7 @@ export function constructEmail(email, story) {
       },
     ],
   };
+
+  
   return msg;
 }
