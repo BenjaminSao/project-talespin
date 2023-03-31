@@ -13,6 +13,7 @@
     height: 980px;
     border-radius: 1rem;
     background-color: $cl-1;
+    position: relative;
 
     padding: 1rem;
 
@@ -31,5 +32,15 @@
       background-color: white;
       padding: 2rem;
     }
+  }
+
+  .convertToPDFButton {
+    position: absolute;
+    bottom: -1rem;
+    right: -1rem;
+    padding: 0.5rem;
+    background-color: white;
+    border-radius: 50%;
+    border: 4px solid $black;
   }
 }
