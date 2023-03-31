@@ -51,7 +51,7 @@ storyRouter.post("/", async (req, res) => {
     const imageURLArray =
       process.env.ENABLE_MOCK_API === "true"
         ? mockImageURLArray()
-        : await generateImages(convertToArray(imagePrompts));
+        : await generateImages(convertTextToArray(imagePrompts));
 
     const imageIdArr = await saveImgUrlArr(imageURLArray);
 
@@ -84,6 +84,7 @@ storyRouter.post("/", async (req, res) => {
       storyContent,
     });
   } catch (e) {
+    console.error(e)
     return res.status(500).json({
       message: "Internal Server Error, Failed to Create Story",
       e,

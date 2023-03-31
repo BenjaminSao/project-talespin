@@ -2,95 +2,108 @@ import styles from "./book.module.scss";
 import FeatherIcon from "feather-icons-react/build/FeatherIcon";
 import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
+import { useAuth0 } from "@auth0/auth0-react";
+import axios from "axios";
 
 const { book, bookImage, bookContent, bookContainer, nextPageButton } = styles;
 
 export default function Book() {
-  const router = useRouter();
+    const { getAccessTokenSilently } = useAuth0();
 
-  const [storyInformation, setStoryInformation] = useState(null);
-  const [index, setIndex] = useState(0);
-  const [bookContentData, setBookContent] = useState(null);
+    const [bookContentData, setBookContent] = useState(null);
+    const [pageIndex, setPageIndex] = useState(0);
 
-  useEffect(() => {
-    if (localStorage.getItem("generatedBook") != null)
-      setStoryInformation(JSON.parse(localStorage.getItem("generatedBook")));
-    else {
-      alert("Error Loading Book");
-      router.push("/");
+    const router = useRouter();
+    const { storyId } = router.query;
+
+    useEffect(() => {
+        if (storyId) fetchBook();
+    }, [getAccessTokenSilently, storyId]);
+
+    async function fetchBook() {
+        try {
+            const res = await axios({
+                url: `http://localhost:3001/api/stories/${storyId}`,
+                method: "GET",
+            });
+            setBookContent(res.data);
+        } catch (e) {
+            console.error(e);
+        }
     }
-  }, []);
 
-  useEffect(() => {
-    if (storyInformation) setBookContent(storyInformation.pages[0]);
-  }, [storyInformation]);
-
-  function handleNextPage() {
-    if (index < storyInformation.pages.length - 1) {
-      setIndex(index + 1);
-      setBookContent(storyInformation.pages[index + 1]);
+    function handleNextPage() {
+        if (pageIndex < bookContentData.pages.length - 1) {
+            setPageIndex(pageIndex + 1);
+        }
     }
-  }
 
-  function handlePreviousPage() {
-    if (index > 0) {
-      setIndex(index - 1);
-      setBookContent(storyInformation.pages[index - 1]);
+    function handlePreviousPage() {
+        if (pageIndex > 0) {
+            setPageIndex(pageIndex - 1);
+        }
     }
-  }
 
-  return (
-    <>
-      <div className="flex justify-center mt-6">
-        <div>
-          <h1 className="text-center font-bold">{router.query.title}</h1>
-          <div className="flex items-center">
-            <button
-              className={`${nextPageButton} mr-4`}
-              onClick={() => handlePreviousPage()}
-            >
-              <FeatherIcon
-                icon={"arrow-left-circle"}
-                size={64}
-                fill={"#4d4d4d"}
-                color={"#FCFCED"}
-                strokeWidth={"1.5px"}
-              ></FeatherIcon>
-            </button>
-            <div className={`${bookContainer}`}>
-              <div className={`${book} mt-4 flex flex-col justify-between`}>
-                {bookContentData ? (
-                  <>
-                    <div
-                      className={`${bookImage}`}
-                      style={{
-                        backgroundImage: `url(${bookContentData.image})`,
-                      }}
-                    ></div>
-                    <div className={`${bookContent} flex items-center`}>
-                      <p className="text-center">{bookContentData.text}</p>
-                    </div>
-                  </>
-                ) : (
-                  <></>
-                )}
-              </div>
+    return (
+        <>
+            <div className="flex justify-center mt-6">
+                <div>
+                    {bookContentData && (
+                        <>
+                            <h1 className="text-center font-bold"></h1>
+                            <div className="flex items-center">
+                                <button
+                                    className={`${nextPageButton} mr-4`}
+                                    onClick={() => handlePreviousPage()}
+                                >
+                                    <FeatherIcon
+                                        icon={"arrow-left-circle"}
+                                        size={64}
+                                        fill={"#4d4d4d"}
+                                        color={"#FCFCED"}
+                                        strokeWidth={"1.5px"}
+                                    ></FeatherIcon>
+                                </button>
+                                <div className={`${bookContainer}`}>
+                                    <div
+                                        className={`${book} mt-4 flex flex-col justify-between`}
+                                    >
+                                        <div
+                                            className={`${bookImage}`}
+                                            style={{
+                                                backgroundImage: `url(http://localhost:3001/api/images/${bookContentData.pages[pageIndex].image})`,
+                                            }}
+                                        ></div>
+                                        <div
+                                            className={`${bookContent} flex items-center`}
+                                        >
+                                            <p className="text-center">
+                                                {
+                                                    bookContentData.pages[
+                                                        pageIndex
+                                                    ].text
+                                                }
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <button
+                                    className={`${nextPageButton} ml-4`}
+                                    onClick={() => handleNextPage()}
+                                >
+                                    <FeatherIcon
+                                        icon={"arrow-right-circle"}
+                                        size={64}
+                                        fill={"#4d4d4d"}
+                                        color={"#FCFCED"}
+                                        strokeWidth={"1.5px"}
+                                    ></FeatherIcon>
+                                </button>
+                            </div>
+                        </>
+                    )}
+                </div>
             </div>
-            <button
-              className={`${nextPageButton} ml-4`}
-              onClick={() => handleNextPage()}
-            >
-              <FeatherIcon
-                icon={"arrow-right-circle"}
-                size={64}
-                fill={"#4d4d4d"}
-                color={"#FCFCED"}
-                strokeWidth={"1.5px"}
-              ></FeatherIcon>
-            </button>
-          </div>
-        </div>
-      </div>
-    </>
-  );
+        </>
+    );
 }
