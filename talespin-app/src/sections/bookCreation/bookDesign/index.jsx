@@ -28,27 +28,48 @@ const {
   artStyleButtons,
   artStyleButton,
   isArtSelected,
+  isBookColor1,
+  isBookColor2,
+  isBookColor3,
+  isBookColor4,
 } = styles;
 
 export default function BookDesignSection() {
   const router = useRouter();
   const [bookGenerationStep, setBookGenerationStep] = useState(0);
+
+  const [color, setColor] = useState("scheme-1");
   const [art, setArt] = useState("colorful");
   const [length, setLength] = useState("short");
+
+  const colorSelector = {
+    "scheme-1": isBookColor1,
+    "scheme-2": isBookColor2,
+    "scheme-3": isBookColor3,
+    "scheme-4": isBookColor4,
+  };
 
   const [title, setTitle] = useState("");
   const [prompt, setPrompt] = useState("");
 
   function handleNextButton() {
-    bookGenerationStep === 0
-      ? setBookGenerationStep(1)
-      : router.push({
+    if (bookGenerationStep === 0) {
+      if (!title) alert("Please Enter a Title");
+      else setBookGenerationStep(1);
+    } else {
+      if (!prompt) alert("Please Enter a Prompt");
+      else
+        router.push({
           pathname: "/loadingScreen",
           query: {
             title,
             prompt,
+            color,
+            art,
+            length,
           },
         });
+    }
   }
 
   return (
@@ -56,7 +77,9 @@ export default function BookDesignSection() {
       <div className="section mt-8">
         <div className="flex flex-col items-center">
           <h1>To start, let's name and design the book!</h1>
-          <div className={`${overallBook} mt-4 relative`}>
+          <div
+            className={`${overallBook} ${colorSelector[color]} mt-4 relative`}
+          >
             <div
               className={`${book} flex flex-col justify-between items-center ${
                 bookGenerationStep === 0 ? "" : "invisible"
@@ -174,11 +197,29 @@ export default function BookDesignSection() {
 
           <div className={`${controlColorButtons}`}>
             <button
-              className={`${controlColorButton} ${isCl1} ${isSelected}`}
+              className={`${controlColorButton} ${isCl1} ${
+                color === "scheme-1" ? isSelected : ""
+              }`}
+              onClick={() => setColor("scheme-1")}
             ></button>
-            <button className={`${controlColorButton} ${isCl2}`}></button>
-            <button className={`${controlColorButton} ${isCl3}`}></button>
-            <button className={`${controlColorButton} ${isCl4}`}></button>
+            <button
+              className={`${controlColorButton} ${isCl2} ${
+                color === "scheme-2" ? isSelected : ""
+              }`}
+              onClick={() => setColor("scheme-2")}
+            ></button>
+            <button
+              className={`${controlColorButton} ${isCl3} ${
+                color === "scheme-3" ? isSelected : ""
+              }`}
+              onClick={() => setColor("scheme-3")}
+            ></button>
+            <button
+              className={`${controlColorButton} ${isCl4} ${
+                color === "scheme-4" ? isSelected : ""
+              }`}
+              onClick={() => setColor("scheme-4")}
+            ></button>
           </div>
 
           <button

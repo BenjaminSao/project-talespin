@@ -13,20 +13,26 @@ import { useAuth0 } from "@auth0/auth0-react";
 
 export default function LoadingScreen() {
   const router = useRouter();
-  const { title, prompt } = router.query;
+  const { title, prompt, color, art, length } = router.query;
   const { isAuthenticated, user } = useAuth0();
 
   useEffect(() => {
     if (user) fetchGeneratedBook();
   }, [isAuthenticated, user]);
 
+  const lengthConversion = {
+    short: 5,
+    medium: 10,
+    long: 15,
+  };
+
   async function fetchGeneratedBook() {
     const data = JSON.stringify({
       title,
       prompt,
-      colorScheme: "blue", // TODO: CHANGE
-      storyLength: 5,
-      artStyle: "artstation",
+      colorScheme: color,
+      storyLength: lengthConversion[length],
+      artStyle: art,
       ownerId: user.sub,
     });
 

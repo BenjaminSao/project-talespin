@@ -15,9 +15,9 @@ export async function generatePrompts(story) {
 
 export async function generateImages(imagePrompts, modifier) {
   const modiferToKeywords = {
-    "colorful": " artstation",
-    "minimal": " artstation and minimal",
-    "realistic": "artstation and hyper-realistic"
+    colorful: " artstation",
+    minimal: " artstation and minimal",
+    realistic: "artstation and hyper-realistic",
   };
 
   const imageURLArray = [];
