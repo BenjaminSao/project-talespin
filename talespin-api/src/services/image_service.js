@@ -13,9 +13,11 @@ export async function generatePrompts(story) {
   return imagePrompts.text;
 }
 
-export async function generateImages(imagePrompts, modifier = "high_quality") {
+export async function generateImages(imagePrompts, modifier) {
   const modiferToKeywords = {
-    high_quality: " artstation",
+    "colorful": " artstation",
+    "minimal": " artstation and minimal",
+    "realistic": "artstation and hyper-realistic"
   };
 
   const imageURLArray = [];
