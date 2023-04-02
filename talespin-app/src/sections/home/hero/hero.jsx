@@ -12,8 +12,8 @@ export default function Hero() {
 
   return (
     <>
-      <section className="section p-6 mt-12 md:p-12">
-        <div className="flex justify-center items-center">
+      <section className="section p-6 md:p-12">
+        <div className="flex justify-center items-center py-12">
           <div className="flex flex-col items-center">
             <Image
               src="/hero-image.png"

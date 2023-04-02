@@ -2,7 +2,6 @@ import styles from "./book.module.scss";
 import FeatherIcon from "feather-icons-react/build/FeatherIcon";
 import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
-import { useAuth0 } from "@auth0/auth0-react";
 import axios from "axios";
 import jsPDF from "jspdf";
 
@@ -19,8 +18,6 @@ const {
 } = styles;
 
 export default function Book() {
-  const { getAccessTokenSilently } = useAuth0();
-
   const [bookContentData, setBookContent] = useState(null);
   const [pageIndex, setPageIndex] = useState(0);
   const [isEmailDialogOpen, setIsEmailDialogOpen] = useState(false);
@@ -31,7 +28,7 @@ export default function Book() {
 
   useEffect(() => {
     if (storyId) fetchBook();
-  }, [getAccessTokenSilently, storyId]);
+  }, [storyId]);
 
   async function fetchBook() {
     try {
@@ -57,25 +54,39 @@ export default function Book() {
     }
   }
 
-  function generatePDF(text) {
+  async function generatePDF() {
     const doc = new jsPDF();
 
-    const maxWidth = 170; // maximum width of the text in the document
-    text = doc.splitTextToSize(text, maxWidth);
+    for (let i = 0; i < bookContentData.pages.length; i++) {
+      const page = bookContentData.pages[i];
 
-    doc.text(text, 10, 10);
-    doc.save("Book.pdf");
+      const image = (
+        await axios({
+          url: `http://localhost:3001/api/images/${page.image}`,
+          method: "GET",
+          responseType: "blob",
+        })
+      ).data;
+
+      const reader = new FileReader();
+      reader.readAsDataURL(image);
+      reader.onloadend = () => {
+        doc.addImage(`${reader.result}`, "JPEG", 30, 30, 150, 150);
+
+        const text = doc.splitTextToSize(page.text, 150);
+        doc.text(text, 30, 200);
+        doc.addPage();
+      };
+    }
+
+    doc.setFontSize(60);
+    doc.text("THE END", 63, 150);
+    doc.save("./Book.pdf");
   }
 
   async function handleConvert() {
-    let bookText = "";
-
-    for (let i = 0; i < bookContentData.pages.length; i++) {
-      bookText += `${bookContentData.pages[i].text}\n\n\n`;
-    }
-
     try {
-      generatePDF(bookText);
+      generatePDF();
     } catch (e) {
       console.error(e);
     }
