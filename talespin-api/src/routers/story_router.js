@@ -15,10 +15,11 @@ import dotenv from "dotenv";
 dotenv.config();
 
 import { Router } from "express";
+import { checkJwt } from "../middlewares/authentication_middleware.js";
 export const storyRouter = Router();
 
 // Given a story prompt, generate an object containing pages of the children's story book
-storyRouter.post("/", async (req, res) => {
+storyRouter.post("/", checkJwt, async (req, res) => {
   // Checking that all needed fields for story creation are here
   const { title, colorScheme, prompt, storyLength, artStyle, ownerId } =
     req.body;
@@ -31,7 +32,7 @@ storyRouter.post("/", async (req, res) => {
     !ownerId
   ) {
     return res.status(400).json({
-      message: "Invalid request, missing mandatory story creation paramater.",
+      message: "Invalid request, missing mandatory story creation parameter.",
     });
   }
 
