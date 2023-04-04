@@ -86,9 +86,14 @@ export default function Book() {
   }
 
   async function handleSendEmail() {
+    const token = await getAccessTokenSilently();
+
     try {
       const res = await axios({
         url: "http://localhost:3001/api/emails/",
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
         method: "POST",
         data: {
           email,

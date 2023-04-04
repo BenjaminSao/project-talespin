@@ -14,13 +14,15 @@ import { useAuth0 } from "@auth0/auth0-react";
 export default function LoadingScreen() {
   const router = useRouter();
   const { title, prompt } = router.query;
-  const { isAuthenticated, user } = useAuth0();
+  const { isAuthenticated, user, getAccessTokenSilently } = useAuth0();
 
   useEffect(() => {
-    if (user) fetchGeneratedBook();
-  }, [isAuthenticated, user]);
+    if (user && getAccessTokenSilently) createBook();
+  }, [isAuthenticated, getAccessTokenSilently, user]);
 
-  async function fetchGeneratedBook() {
+  async function createBook() {
+    const token = await getAccessTokenSilently();
+
     const data = JSON.stringify({
       title,
       prompt,
@@ -35,6 +37,7 @@ export default function LoadingScreen() {
       url: "http://localhost:3001/api/stories",
       headers: {
         "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
       },
       data: data,
     };
