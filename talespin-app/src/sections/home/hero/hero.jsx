@@ -5,8 +5,10 @@ export default function Hero() {
   const { loginWithRedirect } = useAuth0();
 
   function handleLogister() {
+    const currentUrl = window.location.origin + window.location.pathname;
+    const redirectUrl = currentUrl + "dashboard";
     loginWithRedirect({
-      redirectUri: "http://localhost:3000/dashboard",
+      redirectUri: redirectUrl,
     });
   }
 

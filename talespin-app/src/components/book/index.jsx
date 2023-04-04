@@ -33,7 +33,7 @@ export default function Book() {
   async function fetchBook() {
     try {
       const res = await axios({
-        url: `http://localhost:3001/api/stories/${storyId}`,
+        url: `${process.env.NEXT_PUBLIC_API_URL}/stories/${storyId}`,
         method: "GET",
       });
       setBookContent(res.data);
@@ -62,7 +62,7 @@ export default function Book() {
 
       const image = (
         await axios({
-          url: `http://localhost:3001/api/images/${page.image}`,
+          url: `${process.env.NEXT_PUBLIC_API_URL}/images/${page.image}`,
           method: "GET",
           responseType: "blob",
         })
@@ -101,7 +101,7 @@ export default function Book() {
 
     try {
       const res = await axios({
-        url: "http://localhost:3001/api/emails/",
+        url: `${process.env.NEXT_PUBLIC_API_URL}/emails/`,
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -147,7 +147,7 @@ export default function Book() {
                     <div
                       className={`${bookImage}`}
                       style={{
-                        backgroundImage: `url(http://localhost:3001/api/images/${bookContentData.pages[pageIndex].image})`,
+                        backgroundImage: `url(${process.env.NEXT_PUBLIC_API_URL}/images/${bookContentData.pages[pageIndex].image})`,
                       }}
                     ></div>
                     <div className={`${bookContent} flex items-center`}>

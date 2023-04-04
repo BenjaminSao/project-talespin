@@ -40,7 +40,7 @@ export default function LoadingScreen() {
 
     const config = {
       method: "post",
-      url: "http://localhost:3001/api/stories",
+      url: `${process.env.NEXT_PUBLIC_API_URL}/stories`,
       headers: {
         "Content-Type": "application/json",
         Authorization: `Bearer ${token}`,

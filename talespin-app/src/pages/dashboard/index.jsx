@@ -18,7 +18,7 @@ export default function Dashboard() {
     const token = await getAccessTokenSilently();
     try {
       const res = await axios.get(
-        `http://localhost:3001/api/stories/users/${user.sub}`,
+        `${process.env.NEXT_PUBLIC_API_URL}/stories/users/${user.sub}`,
         {
           headers: {
             Authorization: `Bearer ${token}`,
