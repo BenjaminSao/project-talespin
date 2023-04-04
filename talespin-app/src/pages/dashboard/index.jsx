@@ -27,6 +27,7 @@ export default function Dashboard() {
       );
 
       setBookData(res.data);
+      console.log(res.data);
     } catch (e) {
       console.error(e);
     }
@@ -52,6 +53,7 @@ export default function Dashboard() {
                       key={book.info.id}
                       storyId={book.info.id}
                       title={book.info.title}
+                      bookColor={book.info.colorScheme}
                     ></DisplayBook>
                   ))}
                 </>

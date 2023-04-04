@@ -52,7 +52,7 @@ storyRouter.post("/", checkJwt, async (req, res) => {
     const imageURLArray =
       process.env.ENABLE_MOCK_API === "true"
         ? mockImageURLArray()
-        : await generateImages(convertTextToArray(imagePrompts));
+        : await generateImages(convertTextToArray(imagePrompts), artStyle);
 
     const imageIdArr = await saveImgUrlArr(imageURLArray);
 
