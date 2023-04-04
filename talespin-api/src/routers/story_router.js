@@ -56,8 +56,8 @@ storyRouter.post("/", checkJwt, async (req, res) => {
     const imagePromptArray = convertTextToArray(imagePrompts);
 
     // For catching improperly generated prompts
-    if (imagePrompts.length > storyLength) {
-      imagePrompts.splice(storyLength);
+    if (imagePromptArray.length > storyLength) {
+      imagePromptArray.splice(storyLength);
     }
 
     const imageURLArray =

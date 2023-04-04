@@ -62,24 +62,30 @@ export default function Book() {
     for (let i = 0; i < bookContentData.pages.length; i++) {
       const page = bookContentData.pages[i];
 
-      const image = (
-        await axios({
-          url: `${process.env.NEXT_PUBLIC_API_URL}/images/${page.image}`,
-          method: "GET",
-          responseType: "blob",
-        })
-      ).data;
-
-      if (image) {
-        const reader = new FileReader();
-        reader.readAsDataURL(image);
-        reader.onloadend = () => {
-          doc.addImage(`${reader.result}`, "JPEG", 30, 30, 150, 150);
-
-          const text = doc.splitTextToSize(page.text, 150);
-          doc.text(text, 30, 200);
-          doc.addPage();
-        };
+      try {
+        if (page.image) {
+          const image = (
+            await axios({
+              url: `${process.env.NEXT_PUBLIC_API_URL}/images/${page.image}`,
+              method: "GET",
+              responseType: "blob",
+            })
+          ).data;
+    
+          if (image) {
+            const reader = new FileReader();
+            reader.readAsDataURL(image);
+            reader.onloadend = () => {
+              doc.addImage(`${reader.result}`, "JPEG", 30, 30, 150, 150);
+    
+              const text = doc.splitTextToSize(page.text, 150);
+              doc.text(text, 30, 200);
+              doc.addPage();
+            };
+          }
+        }
+      } catch(e) {
+        console.error(e);
       }
     }
 
