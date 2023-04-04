@@ -27,7 +27,6 @@ export default function Dashboard() {
       );
 
       setBookData(res.data);
-      console.log(res.data);
     } catch (e) {
       console.error(e);
     }

@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 import axios from "axios";
 import jsPDF from "jspdf";
+import { useAuth0 } from "@auth0/auth0-react";
 
 const {
   book,
@@ -18,6 +19,7 @@ const {
 } = styles;
 
 export default function Book() {
+  const { getAccessTokenSilently } = useAuth0();
   const [bookContentData, setBookContent] = useState(null);
   const [pageIndex, setPageIndex] = useState(0);
   const [isEmailDialogOpen, setIsEmailDialogOpen] = useState(false);

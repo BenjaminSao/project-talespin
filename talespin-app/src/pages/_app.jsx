@@ -7,7 +7,7 @@ export default function App({ Component, pageProps }) {
       domain="dev-uvuzonh2.us.auth0.com"
       clientId="kNiPiVLBMPyYDYUNow0txbqDm0Wo9Hp7"
       authorizationParams={{
-        redirect_uri: "http://localhost:3000/",
+        redirect_uri: "https://www.talespin.me/",
         audience: "https://talespin.com/api",
       }}
     >
