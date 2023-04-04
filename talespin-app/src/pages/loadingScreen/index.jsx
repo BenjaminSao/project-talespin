@@ -67,17 +67,20 @@ export default function LoadingScreen() {
         <Navbar></Navbar>
         <div className="flex items-center justify-center">
           <div className="book-animation flex flex-col mt-48">
-            <div class="book">
-              <div class="book__pg-shadow"></div>
-              <div class="book__pg"></div>
-              <div class="book__pg book__pg--2"></div>
-              <div class="book__pg book__pg--3"></div>
-              <div class="book__pg book__pg--4"></div>
-              <div class="book__pg book__pg--5"></div>
+            <div className="book">
+              <div className="book__pg-shadow"></div>
+              <div className="book__pg"></div>
+              <div className="book__pg book__pg--2"></div>
+              <div className="book__pg book__pg--3"></div>
+              <div className="book__pg book__pg--4"></div>
+              <div className="book__pg book__pg--5"></div>
             </div>
             <h1 className="text-center mt-6 font-bold">
               Spinning your Tale...
             </h1>
+          </div>
+          <div className="fixed bottom-2 right-4">
+            <p className="text-xs">Animation Credits to (Jon Kantner, FreeFrontend.com)</p>
           </div>
         </div>
       </Container>
