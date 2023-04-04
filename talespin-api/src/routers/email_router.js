@@ -3,10 +3,11 @@ import { constructEmail } from "../utils/email_utils.js";
 
 import { Router } from "express";
 import sgMail from "@sendgrid/mail";
+import { checkJwt } from "../middlewares/authentication_middleware.js";
 export const emailRouter = Router();
 
 // Given an email and a story id, send an email that shares a story
-emailRouter.post("/", async (req, res) => {
+emailRouter.post("/", checkJwt, async (req, res) => {
   sgMail.setApiKey(process.env.SENDGRID_API_KEY);
   const { email, storyId } = req.body;
 
