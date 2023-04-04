@@ -7,19 +7,21 @@ async function generatePDF(storyContent) {
   for (let i = 0; i < storyContent.pages.length; i++) {
     const page = storyContent.pages[i];
     const image = await Image.findByPk(page.image);
-    const imageBuffer = image.image;
-    const base64Image = imageBuffer.toString("base64");
-    doc.addImage(
-      `data:image/jpeg;base64,${base64Image}`,
-      "JPEG",
-      30,
-      30,
-      150,
-      150
-    );
-    const text = doc.splitTextToSize(page.text, 150);
-    doc.text(text, 30, 200);
-    doc.addPage();
+    if (image) {
+      const imageBuffer = image.image;
+      const base64Image = imageBuffer.toString("base64");
+      doc.addImage(
+        `data:image/jpeg;base64,${base64Image}`,
+        "JPEG",
+        30,
+        30,
+        150,
+        150
+      );
+      const text = doc.splitTextToSize(page.text, 150);
+      doc.text(text, 30, 200);
+      doc.addPage();
+    }
   }
   doc.setFontSize(60);
   doc.text("THE END", 63, 150);

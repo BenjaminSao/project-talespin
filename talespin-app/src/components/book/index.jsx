@@ -70,15 +70,17 @@ export default function Book() {
         })
       ).data;
 
-      const reader = new FileReader();
-      reader.readAsDataURL(image);
-      reader.onloadend = () => {
-        doc.addImage(`${reader.result}`, "JPEG", 30, 30, 150, 150);
-
-        const text = doc.splitTextToSize(page.text, 150);
-        doc.text(text, 30, 200);
-        doc.addPage();
-      };
+      if (image) {
+        const reader = new FileReader();
+        reader.readAsDataURL(image);
+        reader.onloadend = () => {
+          doc.addImage(`${reader.result}`, "JPEG", 30, 30, 150, 150);
+  
+          const text = doc.splitTextToSize(page.text, 150);
+          doc.text(text, 30, 200);
+          doc.addPage();
+        };
+      }
     }
 
     doc.setFontSize(60);

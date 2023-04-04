@@ -44,17 +44,30 @@ storyRouter.post("/", checkJwt, async (req, res) => {
         : await generateStory(prompt, storyLength);
     const storyArray = convertTextToArray(story);
 
+    // For catching improperly generated stories
+    if (storyArray.length > storyLength) {
+      storyArray.splice(storyLength);
+    }
+
     const imagePrompts =
       process.env.ENABLE_MOCK_API === "true"
         ? mockImagePrompts()
         : await generatePrompts(story);
+    const imagePromptArray = convertTextToArray(imagePrompts)
+
+    // For catching improperly generated prompts
+    if (imagePrompts.length > storyLength) {
+      imagePrompts.splice(storyLength);
+    }
 
     const imageURLArray =
       process.env.ENABLE_MOCK_API === "true"
         ? mockImageURLArray()
-        : await generateImages(convertTextToArray(imagePrompts), artStyle);
+        : await generateImages(imagePromptArray, artStyle);
 
     const imageIdArr = await saveImgUrlArr(imageURLArray);
+
+    
 
     const storyPageContent = [];
     for (let i = 0; i < storyArray.length; i++) {
