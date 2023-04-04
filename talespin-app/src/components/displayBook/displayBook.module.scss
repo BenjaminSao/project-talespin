@@ -1,5 +1,100 @@
 @import "../../styles/colors.scss";
 
+.overallBook {
+  &.isBookColor1 {
+    .book {
+      background-color: $cl-1;
+      color: white;
+    }
+
+    .bookBadge {
+      // Use of !important is for deprecation sakes
+      background: linear-gradient(
+        0deg,
+        #06d6a0 -1.07%,
+        #ffc43d 98.82%
+      ) !important;
+    }
+
+    .bookPage {
+      border: 3px solid $cl-1;
+    }
+
+    .book2 {
+      background-color: $cl-1;
+    }
+  }
+
+  &.isBookColor2 {
+    .book {
+      background-color: $cl-3;
+      color: white;
+    }
+
+    .bookBadge {
+      background: linear-gradient(
+        0deg,
+        #ef476f -1.07%,
+        #1b9aaa 98.82%
+      ) !important;
+    }
+
+    .bookPage {
+      border: 3px solid $cl-3;
+    }
+
+    .book2 {
+      background-color: $cl-3;
+    }
+  }
+
+  &.isBookColor3 {
+    .book {
+      background-color: $cl-4;
+      color: white;
+    }
+
+    .bookBadge {
+      background: linear-gradient(
+        0deg,
+        #06d6a0 -1.07%,
+        #1b9aaa 98.82%
+      ) !important;
+    }
+
+    .bookPage {
+      border: 3px solid $cl-4;
+    }
+
+    .book2 {
+      background-color: $cl-4;
+    }
+  }
+
+  &.isBookColor4 {
+    .book {
+      background-color: $cl-5;
+      color: $black;
+    }
+
+    .bookBadge {
+      background: linear-gradient(
+        0deg,
+        #ef476f -1.07%,
+        #1b9aaa 98.82%
+      ) !important;
+    }
+
+    .bookPage {
+      border: 3px solid $cl-5;
+    }
+
+    .book2 {
+      background-color: $cl-5;
+    }
+  }
+}
+
 .book {
   width: 250px;
   height: 365px;

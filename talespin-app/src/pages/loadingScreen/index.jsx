@@ -13,20 +13,28 @@ import { useAuth0 } from "@auth0/auth0-react";
 
 export default function LoadingScreen() {
   const router = useRouter();
-  const { title, prompt } = router.query;
-  const { isAuthenticated, user } = useAuth0();
+  const { title, prompt, color, art, length } = router.query;
+  const { isAuthenticated, user, getAccessTokenSilently } = useAuth0();
 
   useEffect(() => {
-    if (user) fetchGeneratedBook();
-  }, [isAuthenticated, user]);
+    if (user && getAccessTokenSilently) createBook();
+  }, [isAuthenticated, getAccessTokenSilently, user]);
 
-  async function fetchGeneratedBook() {
+  const lengthConversion = {
+    short: 5,
+    medium: 10,
+    long: 15,
+  };
+
+  async function createBook() {
+    const token = await getAccessTokenSilently();
+
     const data = JSON.stringify({
       title,
       prompt,
-      colorScheme: "blue", // TODO: CHANGE
-      storyLength: 5,
-      artStyle: "artstation",
+      colorScheme: color,
+      storyLength: lengthConversion[length],
+      artStyle: art,
       ownerId: user.sub,
     });
 
@@ -35,6 +43,7 @@ export default function LoadingScreen() {
       url: "http://localhost:3001/api/stories",
       headers: {
         "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
       },
       data: data,
     };
