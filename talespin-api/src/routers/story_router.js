@@ -53,7 +53,7 @@ storyRouter.post("/", checkJwt, async (req, res) => {
       process.env.ENABLE_MOCK_API === "true"
         ? mockImagePrompts()
         : await generatePrompts(story);
-    const imagePromptArray = convertTextToArray(imagePrompts)
+    const imagePromptArray = convertTextToArray(imagePrompts);
 
     // For catching improperly generated prompts
     if (imagePrompts.length > storyLength) {
@@ -66,8 +66,6 @@ storyRouter.post("/", checkJwt, async (req, res) => {
         : await generateImages(imagePromptArray, artStyle);
 
     const imageIdArr = await saveImgUrlArr(imageURLArray);
-
-    
 
     const storyPageContent = [];
     for (let i = 0; i < storyArray.length; i++) {
