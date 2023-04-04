@@ -65,8 +65,20 @@ export default function LoadingScreen() {
     <>
       <Container>
         <Navbar></Navbar>
-        <div className="flex items-center">
-          <div className={`${loader}`}></div>
+        <div className="flex items-center justify-center">
+          <div className="book-animation flex flex-col mt-48">
+            <div class="book">
+              <div class="book__pg-shadow"></div>
+              <div class="book__pg"></div>
+              <div class="book__pg book__pg--2"></div>
+              <div class="book__pg book__pg--3"></div>
+              <div class="book__pg book__pg--4"></div>
+              <div class="book__pg book__pg--5"></div>
+            </div>
+            <h1 className="text-center mt-6 font-bold">
+              Spinning your Tale...
+            </h1>
+          </div>
         </div>
       </Container>
     </>

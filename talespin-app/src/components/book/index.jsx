@@ -127,7 +127,6 @@ export default function Book() {
       console.error(e);
       alert("Failed to send Email");
     } finally {
-      setEmail("");
       setIsEmailDialogOpen(false);
     }
   }

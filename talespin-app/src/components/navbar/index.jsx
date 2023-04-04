@@ -31,7 +31,7 @@ export default function Navbar() {
             ) : (
               <>
                 <a href="/bookCreation" className="mr-4">
-                  Create
+                  + Create
                 </a>
                 <a href="/dashboard" className="mr-4">
                   Dashboard
