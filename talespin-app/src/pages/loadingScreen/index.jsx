@@ -80,7 +80,9 @@ export default function LoadingScreen() {
             </h1>
           </div>
           <div className="fixed bottom-2 right-4">
-            <p className="text-xs">Animation Credits to (Jon Kantner, FreeFrontend.com)</p>
+            <p className="text-xs">
+              Animation Credits to (Jon Kantner, FreeFrontend.com)
+            </p>
           </div>
         </div>
       </Container>
