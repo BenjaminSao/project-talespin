@@ -2,6 +2,10 @@
 
 Children Storybook Generation powered by Stable Diffusion & GPT-3
 
+## Deployment
+
+https://www.talespin.me/
+
 ## **Demo Video**
 
 [Click to view youtube video](https://youtu.be/0hj8q_1aj3U)
